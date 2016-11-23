@@ -12,7 +12,10 @@ void merge(char **arr, int n, int j, int m);
 void main(int argc, char **argv){
 
  FILE *file; 
- file = fopen(argv[2],"r");//проверить файл,также проверим маллоки и сканф!!
+ if ( (file = fopen(argv[2],"r")) == NULL){
+  printf("Не получается открыть файл.\n");
+  exit(1);
+ }//открытие файла и проверка
 
  int size = atoi(argv[1]);
  char ch = 0;
@@ -64,7 +67,7 @@ void main(int argc, char **argv){
 
  fclose(file);
 
-printf("\nвыберите способ сортировки:\n1) bubble sort\n2) insertion sort\n3) quick sort\n4) merge sort\n");
+ printf("\nвыберите способ сортировки:\n1) bubble sort\n2) insertion sort\n3) quick sort\n4) merge sort\n");
 
  int t = 0,w = 0;
  while(!w){
