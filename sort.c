@@ -6,7 +6,6 @@ int comparator(char *x, char *y);
 void quicksort(char **str, int size);
 void bubblesort(char **str, int size);
 void insertion(char **str, int size);
-void forquick(char **a, char **b);
 void mergesort(char **str, int n, int m);
 void merge(char **arr, int n, int j, int m);
 
@@ -156,12 +155,6 @@ void insertion(char **str, int size){ //сортировка вставками.
  }
 }
 
-void forquick (char **a, char **b){ //свап для быстрой сортировки.
- char *p = *a;
- *a = *b;
- *b = p;
-}
-
 void quicksort(char **str, int size){ //быстрая сортировка.
  char *elem;
  elem = str[size / 2];
@@ -172,7 +165,11 @@ void quicksort(char **str, int size){ //быстрая сортировка.
   while(comparator(str[y], elem))
    y--;
   if (x <= y) {
-   forquick(&str[x++], &str[y--]);
+   char *strN = str[x];
+   str[x] = str[y];
+   str[y] = strN;
+   x++;
+   y--;
   }
  }
  if (y > 0)
@@ -181,7 +178,7 @@ void quicksort(char **str, int size){ //быстрая сортировка.
   quicksort(str + x, size - x);
 }
 
-void mergesort(char **str, int n, int m){//mergesort.
+void mergesort(char **str, int n, int m){//Сортировка слиянием.
  if (n < m){
   int q = (m+n)/2;
   mergesort(str, n, q);
